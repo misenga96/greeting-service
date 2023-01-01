@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicLong;
 @RestController
 public class GreetingController {
 
-    private static final String TEMPLATE = "Hello, %s!";
+    private static final String TEMPLATE = "%s, %s!";
     private final AtomicLong counter = new AtomicLong();
 
     @Autowired
@@ -23,6 +23,6 @@ public class GreetingController {
         if (name.isEmpty()) {
             name = configuration.getDefaultValue();
         }
-        return new Greeting(counter.incrementAndGet(), String.format(TEMPLATE, name));
+        return new Greeting(counter.incrementAndGet(), String.format(TEMPLATE, configuration.getGreeting(), name));
     }
 }
